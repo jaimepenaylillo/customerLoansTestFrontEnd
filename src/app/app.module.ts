@@ -9,6 +9,9 @@ import { CustomerAdministrationComponent } from './components/customer/customer-
 import { ListCustomerComponent } from './components/lists/list-customer/list-customer.component';
 import { ListLoansComponent } from './components/lists/list-loans/list-loans.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'
+import { CustomerService } from './shared/sevices/customer.service';
+import { LoansService } from './shared/sevices/loans.service';
 
 @NgModule({
   declarations: [
@@ -22,9 +25,10 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [CustomerService, LoansService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

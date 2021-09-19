@@ -1,6 +1,6 @@
 export class loan {
   id?: number;
-  idCustomer: number | undefined;
+  customerId: number | undefined;
   dateOfRequest: Date | undefined;
   requestedAmount: number | undefined;
 }

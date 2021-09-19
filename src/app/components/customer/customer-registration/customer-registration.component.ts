@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { customer } from 'src/app/shared/models/customer.model';
+import { CustomerService } from 'src/app/shared/sevices/customer.service';
 
 @Component({
   selector: 'app-customer-registration',
@@ -8,7 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 })
 export class CustomerRegistrationComponent implements OnInit {
   form: FormGroup;
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private customerServ: CustomerService) {
     this.form = this.formBuilder.group({
       id: 0,
       name: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(5)]],
@@ -20,11 +22,17 @@ export class CustomerRegistrationComponent implements OnInit {
   }
 
   saveCustomer() {
-    console.log(this.form)
+    console.log(this.form);
+    const customer: customer = {
+      name: this.form.get('name')?.value,
+      birthdate: this.form.get('birthdate')?.value,
+    }
+    this.customerServ.postCustomer(customer)
+      .subscribe(data => {
+        console.log('Customer Saved');
+        this.form.reset();
+      });
   }
 
-  validFields() {
-    return this.form.get('name') && this.form.get('name')?.valid
-  }
 
 }
