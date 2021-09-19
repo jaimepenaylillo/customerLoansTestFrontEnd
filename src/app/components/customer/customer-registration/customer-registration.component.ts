@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-customer-registration',
@@ -6,10 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./customer-registration.component.css']
 })
 export class CustomerRegistrationComponent implements OnInit {
-
-  constructor() { }
+  form: FormGroup;
+  constructor(private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group({
+      id: 0,
+      name: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(5)]],
+      birthdate: ['', [Validators.required]],
+    })
+  }
 
   ngOnInit(): void {
+  }
+
+  saveCustomer() {
+    console.log(this.form)
+  }
+
+  validFields() {
+    return this.form.get('name') && this.form.get('name')?.valid
   }
 
 }

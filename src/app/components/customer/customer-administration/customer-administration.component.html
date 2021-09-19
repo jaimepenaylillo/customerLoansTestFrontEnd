@@ -1,25 +1,25 @@
-<form>
+<form [formGroup]="form" (ngSubmit)="saveLoan()">
   <div class="form-group">
     <div class="input-group">
       <div class="input-group-prepend">
         <div class="input-group-text bg-white">
-          <i class="fas fa-calendar"></i>
+          <i class="fas fa-calendar" [class.greenIcon]="this.form.get('dateOfRequest')?.valid" [class.redIcon]="this.form.get('dateOfRequest')?.invalid && this.form.get('dateOfRequest')?.touched "></i>
         </div>
       </div>
-      <input type="date" class="form-control" placeholder="Date of request">
+      <input type="date" formControlName="dateOfRequest" class="form-control" placeholder="Date of request">
     </div>
   </div>
   <div class="form-group">
     <div class="input-group">
       <div class="input-group-prepend">
         <div class="input-group-text bg-white">
-          <i class="fas fa-dollar-sign"></i>
+          <i class="fas fa-dollar-sign" [class.greenIcon]="this.form.get('requestedAmount')?.valid"  [class.redIcon]="this.form.get('requestedAmount')?.invalid && this.form.get('requestedAmount')?.touched"></i>
         </div>
       </div>
-      <input type="number" class="form-control text-right" placeholder="Requested Amount">
+      <input type="number" formControlName="requestedAmount" class="form-control text-right" placeholder="Requested Amount">
     </div>
   </div>
-  <button class="btn btn-success btn-lg btn-block" type="submit">
+  <button class="btn btn-success btn-lg btn-block" [disabled]="form.invalid" type="submit">
     <i class="fas fa-plus-square"></i>
     Save
   </button>

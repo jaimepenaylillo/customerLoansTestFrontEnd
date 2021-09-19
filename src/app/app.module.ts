@@ -8,6 +8,7 @@ import { CustomerRegistrationComponent } from './components/customer/customer-re
 import { CustomerAdministrationComponent } from './components/customer/customer-administration/customer-administration.component';
 import { ListCustomerComponent } from './components/lists/list-customer/list-customer.component';
 import { ListLoansComponent } from './components/lists/list-loans/list-loans.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ListLoansComponent } from './components/lists/list-loans/list-loans.com
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
