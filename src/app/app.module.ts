@@ -12,6 +12,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 import { CustomerService } from './shared/sevices/customer.service';
 import { LoansService } from './shared/sevices/loans.service';
+//Added Toastr
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import { LoansService } from './shared/sevices/loans.service';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [CustomerService, LoansService],
   bootstrap: [AppComponent]

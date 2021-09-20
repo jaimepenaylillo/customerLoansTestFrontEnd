@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { ToastrService } from 'ngx-toastr';
 import { customer } from 'src/app/shared/models/customer.model';
 import { CustomerService } from 'src/app/shared/sevices/customer.service';
 
@@ -10,7 +11,7 @@ import { CustomerService } from 'src/app/shared/sevices/customer.service';
 })
 export class CustomerRegistrationComponent implements OnInit {
   form: FormGroup;
-  constructor(private formBuilder: FormBuilder, private customerServ: CustomerService) {
+  constructor(private formBuilder: FormBuilder, private customerServ: CustomerService, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       id: 0,
       name: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(5)]],
@@ -29,7 +30,7 @@ export class CustomerRegistrationComponent implements OnInit {
     }
     this.customerServ.postCustomer(customer)
       .subscribe(data => {
-        console.log('Customer Saved');
+        this.toastr.success('Customer Saved', 'Customer has been added');
         this.form.reset();
       });
   }

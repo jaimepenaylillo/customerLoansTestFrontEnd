@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { ToastrService } from 'ngx-toastr';
 import { loan } from 'src/app/shared/models/loans.model';
 import { LoansService } from 'src/app/shared/sevices/loans.service';
 
@@ -10,7 +11,7 @@ import { LoansService } from 'src/app/shared/sevices/loans.service';
 })
 export class CustomerAdministrationComponent implements OnInit {
   form: FormGroup;
-  constructor(private formBuilder: FormBuilder, private loansServ: LoansService) {
+  constructor(private formBuilder: FormBuilder, private loansServ: LoansService, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       id: 0,
       dateOfRequest: ['', [Validators.required]],
@@ -30,7 +31,7 @@ export class CustomerAdministrationComponent implements OnInit {
     };
     this.loansServ.postLoans(loan)
       .subscribe(data => {
-        console.log('Loan Saved');
+        this.toastr.success('Loan Saved', 'Loan has been added');
         this.form.reset();
       });
   }
